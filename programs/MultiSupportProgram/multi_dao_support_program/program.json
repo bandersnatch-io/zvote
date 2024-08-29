@@ -1,0 +1,14 @@
+{
+  "program": "multi_dao_support_program.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "multi_token_support_program.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../multi_token_support_program"
+    }
+  ]
+}

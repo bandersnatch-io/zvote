@@ -1,0 +1,20 @@
+[[package]]
+name = "credits.aleo"
+network = "testnet"
+location = "network"
+checksum = "a96e301bc901ca10ad7c35da423f0b1721cc30842252a098c47c1a7bd8cb2364"
+dependencies = []
+
+[[package]]
+name = "multi_token_support_program.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/TriggeredOnApproval/Treasury/treasury__dao_based/../../../MultiSupportProgram/multi_token_support_program"
+checksum = "cd163089dcae74c08abdfc6927a63b918e82b36b9e4f7ef10acf98907f7edcab"
+dependencies = ["credits.aleo"]
+
+[[package]]
+name = "multi_dao_support_program.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/TriggeredOnApproval/Treasury/treasury__dao_based/../../../MultiSupportProgram/multi_dao_support_program"
+checksum = "9cace111a80d4cf39b7da6d560ac663756529f1789655ad4467192d56e92cb2e"
+dependencies = ["multi_token_support_program.aleo"]

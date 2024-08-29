@@ -1,0 +1,48 @@
+[[package]]
+name = "credits.aleo"
+network = "testnet"
+location = "network"
+checksum = "a96e301bc901ca10ad7c35da423f0b1721cc30842252a098c47c1a7bd8cb2364"
+dependencies = []
+
+[[package]]
+name = "multi_token_support_program.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoFactories/dao_factory__all_dao/../../MultiSupportProgram/multi_dao_support_program/../multi_token_support_program"
+checksum = "cd163089dcae74c08abdfc6927a63b918e82b36b9e4f7ef10acf98907f7edcab"
+dependencies = ["credits.aleo"]
+
+[[package]]
+name = "multi_dao_support_program.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoFactories/dao_factory__all_dao/../../MultiSupportProgram/multi_dao_support_program"
+checksum = "9cace111a80d4cf39b7da6d560ac663756529f1789655ad4467192d56e92cb2e"
+dependencies = ["multi_token_support_program.aleo"]
+
+[[package]]
+name = "daom__approved_proposer_list.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoFactories/dao_factory__all_dao/../../DaoManager/daom__approved_proposer_list"
+checksum = "06321438fe6302dc5e5932b3bb0583e796bca468ac5af9a1541f9be1d263d238"
+dependencies = ["multi_dao_support_program.aleo"]
+
+[[package]]
+name = "psm__dao_based.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoFactories/dao_factory__all_dao/../../ProposersManager/psm__dao_based"
+checksum = "2ed682125e24f5f6e0a1b4ca2d0b0e0513e3dd5b6c1d93bdb931f08f8ab95e3c"
+dependencies = ["multi_dao_support_program.aleo", "daom__approved_proposer_list.aleo"]
+
+[[package]]
+name = "daomu__dao_based.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoFactories/dao_factory__all_dao/../../DaoManagerUpdater/daomu__dao_based"
+checksum = "7e7304f64bafd4602cfb479ae78514c593da00a54edfd567fc3995a3b01a4b24"
+dependencies = ["multi_dao_support_program.aleo", "daom__approved_proposer_list.aleo"]
+
+[[package]]
+name = "vsm__dao_based.aleo"
+location = "local"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoFactories/dao_factory__all_dao/../../VotingSystemManager/vsm__dao_based"
+checksum = "e1a3f64048ea6f8b3a55072294332754ca8a2d8a3b3f655a9428f9dd437393aa"
+dependencies = ["multi_dao_support_program.aleo", "daom__approved_proposer_list.aleo"]

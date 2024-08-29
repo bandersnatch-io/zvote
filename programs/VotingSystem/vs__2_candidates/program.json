@@ -1,0 +1,20 @@
+{
+  "program": "vs__2_candidates.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "multi_token_support_program.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../MultiSupportProgram/multi_token_support_program"
+    },
+    {
+      "name": "multi_dao_support_program.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../MultiSupportProgram/multi_dao_support_program"
+    }
+  ]
+}
