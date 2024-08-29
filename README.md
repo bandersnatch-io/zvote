@@ -71,11 +71,11 @@ In `programs/DaoFactory/dao_factory__zvote.aleo`:
 leo run register_dao \
     \ # Dao ID
     888field \
-    \ # MTSP Credits Token ID
+    \ # Gouvernance token MTSP Token ID: Credits Wrapper
     3443843282313283355522573239085696902919850365217539366784739393210722344986field \
     \ # Voting system:
     vs__2_candidates.aleo \ 
-    \ # Voting parameters hash:
+    \ # Voting parameters hash: BHP256::hash_to_field({ candidates: [0field, 0field] })
     5861753428027966921366446481874909916006942163617226737729187037817006635040field
 ```
 
