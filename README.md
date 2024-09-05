@@ -2,6 +2,14 @@
         <span style="display: inline-block;  vertical-align: middle;">zVote.io</span>
 </h1>
 
+<h1 align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="./logo-dark.png" width="350">
+        <source media="(prefers-color-scheme: light)" srcset="./logo-light.png" width="350">
+        <img alt="snarkDB" src="./logo-light.png" width="350">
+    </picture>
+</h1>
+
 <p align="center">
     <a href="https://zvote.io"> <img alt="Website" src="https://img.shields.io/badge/docs-online-blue"></a>
     <a href="https://zvote.io"><img src="https://img.shields.io/badge/status-ℹ-green"/></a>
