@@ -1,24 +1,8 @@
 import credits.aleo;
-import multi_token_support_program.aleo;
 import multi_dao_support_program.aleo;
 import daom__approved_proposer_list.aleo;
+import multi_token_support_programv1.aleo;
 program treasury__dao_based.aleo;
-
-
-struct TokenMetadata:
-    token_id as field;
-    name as u128;
-    symbol as u128;
-    decimals as u8;
-    supply as u128;
-    max_supply as u128;
-    admin as address;
-    external_authorization_required as boolean;
-    external_authorization_party as address;
-
-struct TokenOwner:
-    account as address;
-    token_id as field;
 
 
 struct Dao:
@@ -46,6 +30,22 @@ struct ProposerKey:
     dao_id as field;
     proposer as address;
 
+struct TokenMetadata:
+    token_id as field;
+    name as u128;
+    symbol as u128;
+    decimals as u8;
+    supply as u128;
+    max_supply as u128;
+    admin as address;
+    external_authorization_required as boolean;
+    external_authorization_party as address;
+
+struct TokenOwner:
+    account as address;
+    token_id as field;
+
+
 struct HookedTransfer:
     proposal_id as field;
     token_id as field;
@@ -63,14 +63,14 @@ function transfer_public:
     input r0 as HookedTransfer.public;
     cast 123field r0.proposal_id into r1 as ProposalKey;
     hash.bhp256 r1 into r2 as field;
-    call multi_token_support_program.aleo/transfer_public r0.token_id r0.recipient r0.amount into r3;
+    call multi_token_support_programv1.aleo/transfer_public r0.token_id r0.recipient r0.amount into r3;
     async transfer_public r0 r2 r3 into r4;
     output r4 as treasury__dao_based.aleo/transfer_public.future;
 
 finalize transfer_public:
     input r0 as HookedTransfer.public;
     input r1 as field.public;
-    input r2 as multi_token_support_program.aleo/transfer_public.future;
+    input r2 as multi_token_support_programv1.aleo/transfer_public.future;
     await r2;
     get multi_dao_support_program.aleo/results[r1] into r3;
     assert.eq r3 r0.triggering_result;
