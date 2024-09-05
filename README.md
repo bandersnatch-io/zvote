@@ -4,9 +4,9 @@
 
 <h1 align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./logo-dark.png" width="350">
-        <source media="(prefers-color-scheme: light)" srcset="./logo-light.png" width="350">
-        <img alt="snarkDB" src="./logo-light.png" width="350">
+        <source media="(prefers-color-scheme: dark)" srcset="./media/logo-dark.png" width="350">
+        <source media="(prefers-color-scheme: light)" srcset="./media/logo-light.png" width="350">
+        <img alt="snarkDB" src="./media/logo-light.png" width="350">
     </picture>
 </h1>
 
