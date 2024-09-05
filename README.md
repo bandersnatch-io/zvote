@@ -1,8 +1,8 @@
 <h1 align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./media/logo-dark.png" width="100">
-        <source media="(prefers-color-scheme: light)" srcset="./media/logo-light.png" width="100">
-        <img alt="snarkDB" src="./media/logo-light.png" width="100">
+        <source media="(prefers-color-scheme: dark)" srcset="./media/logo-dark.png" width="140">
+        <source media="(prefers-color-scheme: light)" srcset="./media/logo-light.png" width="140">
+        <img alt="snarkDB" src="./media/logo-light.png" width="140">
     </picture>
 </h1>
 
