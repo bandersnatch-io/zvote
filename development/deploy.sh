@@ -38,3 +38,13 @@ deploy_any "./programs/TriggeredOnApproval/Treasury" "treasury__dao_based";
 
 
 
+
+
+
+snarkos developer deploy \
+--private-key $PRIVATE_KEY \
+--query $NODE_URL \
+--priority-fee 0 \
+--broadcast "$NODE_URL/testnet/transaction/broadcast" \
+--network 1 \
+"vs__2_candidates.aleo";

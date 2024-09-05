@@ -72,7 +72,7 @@ To create a DAO with a simple default quorum based 2 candidates (true/false) vot
 In `programs/DaoFactory/dao_factory__zvote.aleo`:
 
 ```bash
-leo run register_dao \
+leo run register_proposer_list_dao \
     \ # Dao ID
     888field \
     \ # Gouvernance token MTSP Token ID: Credits Wrapper
@@ -80,7 +80,10 @@ leo run register_dao \
     \ # Voting system:
     vs__2_candidates.aleo \ 
     \ # Voting parameters hash: BHP256::hash_to_field({ candidates: [0field, 0field] })
-    5861753428027966921366446481874909916006942163617226737729187037817006635040field
+    5861753428027966921366446481874909916006942163617226737729187037817006635040field \
+    aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc \
+    aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc \
+    psm__dao_based.aleo 
 ```
 
 It runs the following leo program then registers the DAO:
@@ -88,58 +91,44 @@ It runs the following leo program then registers the DAO:
 ```rust
 import multi_dao_support_program.aleo;
 import daom__approved_proposer_list.aleo;
-import psm__dao_based.aleo;
-import daomu__dao_based.aleo;
-import vsm__dao_based_apl.aleo;
-
+import daom__no_approval_required.aleo;
 
 program zvote_dao_factory.aleo {
-    async transition register_dao(
+    async transition register_proposer_list_dao(
         public dao_id: field,
         public token_id: field,
         public initial_voting_system: address,
-        public initial_vs_params_hash: field
+        public initial_vs_params_hash: field,
+        public dao_manager_updater: address,
+        public voting_system_manager: address,
+        public proposers_manager: address,
     ) -> Future {
         let register_dao_future: Future =
             multi_dao_support_program.aleo/register_dao(
                 dao_id,
                 token_id,
-                daom__approved_proposer_list.aleo
+                daom__approved_proposer_list.aleo,
+                initial_voting_system,
+                initial_vs_params_hash
             );
         let init_as_dao_manager_future: Future =
             daom__approved_proposer_list.aleo/init_as_dao_manager(
                 dao_id,
-                vsm__dao_based_apl.aleo,
-                daomu__dao_based.aleo,
-                psm__dao_based.aleo
+                dao_manager_updater,
+                voting_system_manager,
+                proposers_manager
             );
-        let init_as_proposers_manager_future: Future =
-            psm__dao_based.aleo/init_as_proposers_manager(
-                dao_id
-            );
-        let init_as_vs_future: Future =
-            vsm__dao_based_apl.aleo/init_as_voting_system_manager(
-                dao_id,
-                initial_voting_system,
-                initial_vs_params_hash
-            );
-        return finalize_register_dao(
+        return finalize_register_proposer_list_dao(
             register_dao_future,
-            init_as_dao_manager_future,
-            init_as_proposers_manager_future,
-            init_as_vs_future
+            init_as_dao_manager_future
         );
     }
-    async function finalize_register_dao(
+    async function finalize_register_proposer_list_dao(
         register_dao_future: Future,
-        init_as_dao_manager_future: Future,
-        init_as_proposers_manager_future: Future,
-        init_as_vs_future: Future
+        init_as_dao_manager_future: Future
     ) {
         register_dao_future.await();
         init_as_dao_manager_future.await();
-        init_as_proposers_manager_future.await();
-        init_as_vs_future.await();
     }
 }
 ```
