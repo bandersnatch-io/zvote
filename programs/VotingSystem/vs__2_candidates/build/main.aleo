@@ -1,23 +1,7 @@
 import credits.aleo;
-import multi_token_support_program.aleo;
 import multi_dao_support_program.aleo;
+import multi_token_support_programv1.aleo;
 program vs__2_candidates.aleo;
-
-
-struct TokenMetadata:
-    token_id as field;
-    name as u128;
-    symbol as u128;
-    decimals as u8;
-    supply as u128;
-    max_supply as u128;
-    admin as address;
-    external_authorization_required as boolean;
-    external_authorization_party as address;
-
-struct TokenOwner:
-    account as address;
-    token_id as field;
 
 
 struct Dao:
@@ -40,6 +24,22 @@ struct VotingSystemKey:
     dao_id as field;
     voting_system as address;
     vs_params_hash as field;
+
+struct TokenMetadata:
+    token_id as field;
+    name as u128;
+    symbol as u128;
+    decimals as u8;
+    supply as u128;
+    max_supply as u128;
+    admin as address;
+    external_authorization_required as boolean;
+    external_authorization_party as address;
+
+struct TokenOwner:
+    account as address;
+    token_id as field;
+
 
 record CustodyReceipt:
     owner as address.private;
@@ -172,15 +172,15 @@ function cast_vote:
     input r1 as u128.public;
     input r2 as field.public;
     input r3 as field.public;
-    input r4 as multi_token_support_program.aleo/Token.record;
+    input r4 as multi_token_support_programv1.aleo/Token.record;
     cast r0 r2 into r5 as ProposalKey;
     hash.bhp256 r5 into r6 as field;
     cast r0 r2 r3 into r7 as ScoreKey;
     hash.bhp256 r7 into r8 as field;
-    call multi_token_support_program.aleo/transfer_private_to_public vs__2_candidates.aleo r1 r4 into r9 r10;
+    call multi_token_support_programv1.aleo/transfer_private_to_public vs__2_candidates.aleo r1 r4 into r9 r10;
     cast self.signer r1 r4.token_id r4.external_authorization_required r0 r2 r3 into r11 as CustodyReceipt.record;
     async cast_vote r0 r4.token_id r1 r6 r8 r3 r10 into r12;
-    output r9 as multi_token_support_program.aleo/Token.record;
+    output r9 as multi_token_support_programv1.aleo/Token.record;
     output r11 as CustodyReceipt.record;
     output r12 as vs__2_candidates.aleo/cast_vote.future;
 
@@ -191,7 +191,7 @@ finalize cast_vote:
     input r3 as field.public;
     input r4 as field.public;
     input r5 as field.public;
-    input r6 as multi_token_support_program.aleo/transfer_private_to_public.future;
+    input r6 as multi_token_support_programv1.aleo/transfer_private_to_public.future;
     await r6;
     get multi_dao_support_program.aleo/daos[r0] into r7;
     assert.eq r7.token_id r1;
@@ -214,19 +214,19 @@ function withdraw_receipt:
     hash.bhp256 r2 into r3 as field;
     cast r1.dao_id r1.proposal_id r1.candidate into r4 as ScoreKey;
     hash.bhp256 r4 into r5 as field;
-    call multi_token_support_program.aleo/transfer_public_to_private r1.token_id r1.owner r0 r1.external_authorization_required into r6 r7;
+    call multi_token_support_programv1.aleo/transfer_public_to_private r1.token_id r1.owner r0 r1.external_authorization_required into r6 r7;
     sub r1.amount r0 into r8;
     cast self.signer r8 r1.token_id r1.external_authorization_required r1.dao_id r1.proposal_id r1.candidate into r9 as CustodyReceipt.record;
     async withdraw_receipt r0 r5 r1.candidate r7 into r10;
     output r9 as CustodyReceipt.record;
-    output r6 as multi_token_support_program.aleo/Token.record;
+    output r6 as multi_token_support_programv1.aleo/Token.record;
     output r10 as vs__2_candidates.aleo/withdraw_receipt.future;
 
 finalize withdraw_receipt:
     input r0 as u128.public;
     input r1 as field.public;
     input r2 as field.public;
-    input r3 as multi_token_support_program.aleo/transfer_public_to_private.future;
+    input r3 as multi_token_support_programv1.aleo/transfer_public_to_private.future;
     await r3;
     get scores[r1] into r4;
     sub r4 r0 into r5;

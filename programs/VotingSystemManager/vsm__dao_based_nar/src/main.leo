@@ -1,8 +1,8 @@
 import multi_dao_support_program.aleo;
-import daom__approved_proposer_list.aleo;
+import daom__no_approval_required.aleo;
 
 
-program vsm__dao_based.aleo { 
+program vsm__dao_based_nar.aleo { 
     struct ProposalKey {
         dao_id: field,
         proposal_id: field,
@@ -18,35 +18,6 @@ program vsm__dao_based.aleo {
     mapping voting_system_proposals: field => VotingSystemProposal;
     // hash(ProposalKey) => VotingSystemProposal
 
-    async transition init_as_voting_system_manager(
-        public dao_id: field,
-        public default_voting_system: address,
-        public default_vs_params_hash: field
-    ) -> Future {
-        let approve_proposer_future: Future =
-            daom__approved_proposer_list.aleo/add_approved_proposer(
-                dao_id, self.address
-            );
-        let add_default_vs_future: Future =
-            daom__approved_proposer_list.aleo/add_voting_system(
-                dao_id,
-                default_voting_system,
-                default_vs_params_hash
-            );
-
-        return finalize_init_as_voting_system_manager(
-            approve_proposer_future,
-            add_default_vs_future
-        );
-    }
-    async function finalize_init_as_voting_system_manager(
-        approve_proposer_future: Future,
-        add_default_vs_future: Future
-    ) {
-        approve_proposer_future.await();
-        add_default_vs_future.await();
-    }
-
     async transition create_approve_proposal(
         public dao_id: field,
         public proposal_id: field,
@@ -58,7 +29,7 @@ program vsm__dao_based.aleo {
         public is_add: bool
     ) -> Future {
         let create_proposal_future: Future =
-            daom__approved_proposer_list.aleo/create_proposal(
+            daom__no_approval_required.aleo/create_proposal(
                 dao_id,
                 proposal_id,
                 proposal_content,
@@ -106,7 +77,7 @@ program vsm__dao_based.aleo {
         public new_vs_params_hash: field
     ) -> Future {
         let approve_proposer_future: Future =
-            daom__approved_proposer_list.aleo/add_voting_system(
+            daom__no_approval_required.aleo/add_voting_system(
                 dao_id,
                 new_voting_system,
                 new_vs_params_hash
@@ -153,7 +124,7 @@ program vsm__dao_based.aleo {
         public new_vs_params_hash: field
     ) -> Future {
         let approve_proposer_future: Future =
-            daom__approved_proposer_list.aleo/remove_voting_system(
+            daom__no_approval_required.aleo/remove_voting_system(
                 dao_id,
                 new_voting_system,
                 new_vs_params_hash

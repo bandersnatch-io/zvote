@@ -88,19 +88,6 @@ finalize remove_approved_proposer:
 
 
 
-function init_as_proposers_manager:
-    input r0 as field.public;
-    call daom__approved_proposer_list.aleo/add_approved_proposer r0 psm__dao_based.aleo into r1;
-    async init_as_proposers_manager r1 into r2;
-    output r2 as psm__dao_based.aleo/init_as_proposers_manager.future;
-
-finalize init_as_proposers_manager:
-    input r0 as daom__approved_proposer_list.aleo/add_approved_proposer.future;
-    await r0;
-
-
-
-
 function create_approve_proposal:
     input r0 as field.public;
     input r1 as field.public;

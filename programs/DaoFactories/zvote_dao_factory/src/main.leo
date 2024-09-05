@@ -1,56 +1,95 @@
 import multi_dao_support_program.aleo;
 import daom__approved_proposer_list.aleo;
-import psm__dao_based.aleo;
-import daomu__dao_based.aleo;
-import vsm__dao_based.aleo;
-
+import daom__no_approval_required.aleo;
 
 program zvote_dao_factory.aleo {
-    async transition register_dao(
+    async transition register_proposer_list_dao(
         public dao_id: field,
         public token_id: field,
         public initial_voting_system: address,
-        public initial_vs_params_hash: field
+        public initial_vs_params_hash: field,
+        public dao_manager_updater: address,
+        public voting_system_manager: address,
+        public proposers_manager: address,
     ) -> Future {
         let register_dao_future: Future =
             multi_dao_support_program.aleo/register_dao(
                 dao_id,
                 token_id,
-                daom__approved_proposer_list.aleo
+                daom__approved_proposer_list.aleo,
+                initial_voting_system,
+                initial_vs_params_hash
             );
         let init_as_dao_manager_future: Future =
             daom__approved_proposer_list.aleo/init_as_dao_manager(
                 dao_id,
-                vsm__dao_based.aleo,
-                daomu__dao_based.aleo,
-                psm__dao_based.aleo
+                dao_manager_updater,
+                voting_system_manager,
+                proposers_manager
             );
-        let init_as_proposers_manager_future: Future =
-            psm__dao_based.aleo/init_as_proposers_manager(
-                dao_id
-            );
-        let init_as_vs_future: Future =
-            vsm__dao_based.aleo/init_as_voting_system_manager(
-                dao_id,
-                initial_voting_system,
-                initial_vs_params_hash
-            );
-        return finalize_register_dao(
+        return finalize_register_proposer_list_dao(
             register_dao_future,
-            init_as_dao_manager_future,
-            init_as_proposers_manager_future,
-            init_as_vs_future
+            init_as_dao_manager_future
         );
     }
-    async function finalize_register_dao(
+    async function finalize_register_proposer_list_dao(
         register_dao_future: Future,
-        init_as_dao_manager_future: Future,
-        init_as_proposers_manager_future: Future,
-        init_as_vs_future: Future
+        init_as_dao_manager_future: Future
     ) {
         register_dao_future.await();
         init_as_dao_manager_future.await();
-        init_as_proposers_manager_future.await();
-        init_as_vs_future.await();
     }
+
+
+    async transition register_any_proposer_dao(
+        public dao_id: field,
+        public token_id: field,
+        public initial_voting_system: address,
+        public initial_vs_params_hash: field,
+        public dao_manager_updater: address,
+        public voting_system_manager: address,
+    ) -> Future {
+        let register_dao_future: Future =
+            multi_dao_support_program.aleo/register_dao(
+                dao_id,
+                token_id,
+                daom__approved_proposer_list.aleo,
+                initial_voting_system,
+                initial_vs_params_hash
+            );
+        let init_as_dao_manager_future: Future =
+            daom__no_approval_required.aleo/init_as_dao_manager(
+                dao_id,
+                dao_manager_updater,
+                voting_system_manager,
+            );
+        return finalize_register_any_proposer_dao(
+            register_dao_future,
+            init_as_dao_manager_future,
+        );
+    }
+    async function finalize_register_any_proposer_dao(
+        register_dao_future: Future,
+        init_as_dao_manager_future: Future
+    ) {
+        register_dao_future.await();
+        init_as_dao_manager_future.await();
+    }
+
 }
+
+
+
+// vsm__dao_based_nar
+
+/*
+
+
+dao_manager_updater: address(null or not) / program           0
+voting_sys_manager: address(null or not) / program            0
+proposers_manager: anyone / address(null or not) / program    1
+
+
+110 | 100:  voting_system_manager = vsm__dao_based_nar.aleo | 
+
+*/

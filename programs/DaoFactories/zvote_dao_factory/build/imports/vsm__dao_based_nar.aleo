@@ -1,6 +1,6 @@
 import multi_dao_support_program.aleo;
-import daom__approved_proposer_list.aleo;
-program vsm__dao_based.aleo;
+import daom__no_approval_required.aleo;
+program vsm__dao_based_nar.aleo;
 
 struct Dao:
     dao_id as field;
@@ -41,17 +41,17 @@ function add_voting_system:
     input r1 as field.public;
     input r2 as address.public;
     input r3 as field.public;
-    call daom__approved_proposer_list.aleo/add_voting_system r0 r2 r3 into r4;
+    call daom__no_approval_required.aleo/add_voting_system r0 r2 r3 into r4;
     cast r0 r1 into r5 as ProposalKey;
     hash.bhp256 r5 into r6 as field;
     async add_voting_system r6 r2 r3 r4 into r7;
-    output r7 as vsm__dao_based.aleo/add_voting_system.future;
+    output r7 as vsm__dao_based_nar.aleo/add_voting_system.future;
 
 finalize add_voting_system:
     input r0 as field.public;
     input r1 as address.public;
     input r2 as field.public;
-    input r3 as daom__approved_proposer_list.aleo/add_voting_system.future;
+    input r3 as daom__no_approval_required.aleo/add_voting_system.future;
     get voting_system_proposals[r0] into r4;
     assert.eq r4.voting_system r1;
     assert.eq r4.vs_params_hash r2;
@@ -70,17 +70,17 @@ function remove_voting_system:
     input r1 as field.public;
     input r2 as address.public;
     input r3 as field.public;
-    call daom__approved_proposer_list.aleo/remove_voting_system r0 r2 r3 into r4;
+    call daom__no_approval_required.aleo/remove_voting_system r0 r2 r3 into r4;
     cast r0 r1 into r5 as ProposalKey;
     hash.bhp256 r5 into r6 as field;
     async remove_voting_system r6 r2 r3 r4 into r7;
-    output r7 as vsm__dao_based.aleo/remove_voting_system.future;
+    output r7 as vsm__dao_based_nar.aleo/remove_voting_system.future;
 
 finalize remove_voting_system:
     input r0 as field.public;
     input r1 as address.public;
     input r2 as field.public;
-    input r3 as daom__approved_proposer_list.aleo/remove_voting_system.future;
+    input r3 as daom__no_approval_required.aleo/remove_voting_system.future;
     get voting_system_proposals[r0] into r4;
     assert.eq r4.voting_system r1;
     assert.eq r4.vs_params_hash r2;
@@ -95,24 +95,6 @@ finalize remove_voting_system:
 
 
 
-function init_as_voting_system_manager:
-    input r0 as field.public;
-    input r1 as address.public;
-    input r2 as field.public;
-    call daom__approved_proposer_list.aleo/add_approved_proposer r0 vsm__dao_based.aleo into r3;
-    call daom__approved_proposer_list.aleo/add_voting_system r0 r1 r2 into r4;
-    async init_as_voting_system_manager r3 r4 into r5;
-    output r5 as vsm__dao_based.aleo/init_as_voting_system_manager.future;
-
-finalize init_as_voting_system_manager:
-    input r0 as daom__approved_proposer_list.aleo/add_approved_proposer.future;
-    input r1 as daom__approved_proposer_list.aleo/add_voting_system.future;
-    await r0;
-    await r1;
-
-
-
-
 function create_approve_proposal:
     input r0 as field.public;
     input r1 as field.public;
@@ -122,17 +104,17 @@ function create_approve_proposal:
     input r5 as address.public;
     input r6 as field.public;
     input r7 as boolean.public;
-    call daom__approved_proposer_list.aleo/create_proposal r0 r1 r2 r5 r6 into r8;
+    call daom__no_approval_required.aleo/create_proposal r0 r1 r2 r5 r6 into r8;
     cast r0 r1 r3 r4 r7 into r9 as VotingSystemProposal;
     cast r0 r1 into r10 as ProposalKey;
     hash.bhp256 r10 into r11 as field;
     async create_approve_proposal r11 r9 r8 into r12;
-    output r12 as vsm__dao_based.aleo/create_approve_proposal.future;
+    output r12 as vsm__dao_based_nar.aleo/create_approve_proposal.future;
 
 finalize create_approve_proposal:
     input r0 as field.public;
     input r1 as VotingSystemProposal.public;
-    input r2 as daom__approved_proposer_list.aleo/create_proposal.future;
+    input r2 as daom__no_approval_required.aleo/create_proposal.future;
     await r2;
     contains voting_system_proposals[r0] into r3;
     not r3 into r4;

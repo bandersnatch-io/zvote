@@ -17,22 +17,6 @@ program psm__dao_based.aleo {
     mapping approve_proposer_proposals: field => ProposerProposal;
     // hash(ProposalKey) => proposer_proposal
 
-    async transition init_as_proposers_manager(
-        public dao_id: field,
-    ) -> Future {
-        let approve_proposer_future: Future =
-            daom__approved_proposer_list.aleo/add_approved_proposer(
-                dao_id, self.address
-            );
-        return finalize_init_as_proposers_manager(
-            approve_proposer_future
-        );
-    }
-    async function finalize_init_as_proposers_manager(
-        approve_proposer_future: Future
-    ) {
-        approve_proposer_future.await();
-    }
 
     async transition create_approve_proposal(
         public dao_id: field,

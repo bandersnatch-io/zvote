@@ -8,13 +8,13 @@ dependencies = []
 [[package]]
 name = "multi_token_support_program.aleo"
 location = "local"
-path = "/Users/palong/bandersnatch/projects/zvote/programs/proposers/no_approval_required_proposer/../../multi_dao_support_program/../multi_token_support_program"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoManager/daom__no_approval_required/../../MultiSupportProgram/multi_dao_support_program/../multi_token_support_program"
 checksum = "cd163089dcae74c08abdfc6927a63b918e82b36b9e4f7ef10acf98907f7edcab"
 dependencies = ["credits.aleo"]
 
 [[package]]
 name = "multi_dao_support_program.aleo"
 location = "local"
-path = "/Users/palong/bandersnatch/projects/zvote/programs/proposers/no_approval_required_proposer/../../multi_dao_support_program"
-checksum = "82eabbd47ca9e81a026816e06fae740640cac0cfbcac0ea6c2ebb0b60738b423"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/DaoManager/daom__no_approval_required/../../MultiSupportProgram/multi_dao_support_program"
+checksum = "8464db9e40d5dd798bd10bd303e2ccafb3a74c526a2ddd89865f0bb972ebb43c"
 dependencies = ["multi_token_support_program.aleo"]

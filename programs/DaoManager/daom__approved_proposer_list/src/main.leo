@@ -19,8 +19,8 @@ program daom__approved_proposer_list.aleo {
 
     async transition init_as_dao_manager(
         public dao_id: field,
-        public voting_system_manager: address,
         public dao_manager_updater: address,
+        public voting_system_manager: address,
         public proposers_manager: address,
     ) -> Future {
         let update_dao_manager_future: Future =
@@ -30,13 +30,19 @@ program daom__approved_proposer_list.aleo {
         let dao_manager_updater_hash_key: field = BHP256::hash_to_field(
             ProposerKey {
                 dao_id: dao_id,
-                proposer: proposers_manager
+                proposer: dao_manager_updater
             }
         );
         let voting_system_manager_hash_key: field = BHP256::hash_to_field(
             ProposerKey {
                 dao_id: dao_id,
                 proposer: voting_system_manager
+            }
+        );
+        let proposer_manager_hash_key: field = BHP256::hash_to_field(
+            ProposerKey {
+                dao_id: dao_id,
+                proposer: proposers_manager
             }
         );
         return finalize_init_as_dao_manager(
@@ -46,6 +52,7 @@ program daom__approved_proposer_list.aleo {
             dao_manager_updater,
             dao_manager_updater_hash_key,
             proposers_manager,
+            proposer_manager_hash_key,
             update_dao_manager_future
         );
     }
@@ -56,6 +63,7 @@ program daom__approved_proposer_list.aleo {
         dao_manager_updater: address,
         dao_manager_updater_hash_key: field,
         proposers_manager: address,
+        proposers_manager_hash_key: field,
         update_dao_manager_future: Future
     ) {
         update_dao_manager_future.await();
@@ -67,6 +75,7 @@ program daom__approved_proposer_list.aleo {
 
         approved_proposers.set(dao_manager_updater_hash_key, true);
         approved_proposers.set(voting_system_manager_hash_key, true);
+        approved_proposers.set(proposers_manager_hash_key, true);
     }
 
 
@@ -111,11 +120,22 @@ program daom__approved_proposer_list.aleo {
             }
         );
 
+        let proposers_manager: address = 
+            proposers_managers.get(dao_id);
+        let proposers_managers_hash_key: field = BHP256::hash_to_field(
+            ProposerKey {
+                dao_id: dao_id,
+                proposer: proposers_manager,
+            }
+        );
+
         proposers_managers.remove(dao_id);
         dao_manager_updaters.remove(dao_id);
         voting_system_managers.remove(dao_id);
+
         approved_proposers.remove(dao_manager_updater_hash_key);
         approved_proposers.remove(voting_system_manager_hash_key);
+        approved_proposers.remove(proposers_managers_hash_key);
     }
 
 

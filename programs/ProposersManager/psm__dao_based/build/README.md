@@ -1,4 +1,4 @@
-# dao_based_approved_list_admin.aleo
+# psm__dao_based.aleo
 
 ## Build Guide
 

@@ -63,11 +63,15 @@ finalize update_dao_manager:
     get voting_system_managers[r0] into r5;
     cast r0 r5 into r6 as ProposerKey;
     hash.bhp256 r6 into r7 as field;
+    get proposers_managers[r0] into r8;
+    cast r0 r8 into r9 as ProposerKey;
+    hash.bhp256 r9 into r10 as field;
     remove proposers_managers[r0];
     remove dao_manager_updaters[r0];
     remove voting_system_managers[r0];
     remove approved_proposers[r2];
     remove approved_proposers[r7];
+    remove approved_proposers[r10];
 
 
 
@@ -138,12 +142,14 @@ function init_as_dao_manager:
     input r2 as address.public;
     input r3 as address.public;
     call multi_dao_support_program.aleo/update_dao_manager r0 daom__approved_proposer_list.aleo into r4;
-    cast r0 r3 into r5 as ProposerKey;
+    cast r0 r1 into r5 as ProposerKey;
     hash.bhp256 r5 into r6 as field;
-    cast r0 r1 into r7 as ProposerKey;
+    cast r0 r2 into r7 as ProposerKey;
     hash.bhp256 r7 into r8 as field;
-    async init_as_dao_manager r0 r1 r8 r2 r6 r3 r4 into r9;
-    output r9 as daom__approved_proposer_list.aleo/init_as_dao_manager.future;
+    cast r0 r3 into r9 as ProposerKey;
+    hash.bhp256 r9 into r10 as field;
+    async init_as_dao_manager r0 r2 r8 r1 r6 r3 r10 r4 into r11;
+    output r11 as daom__approved_proposer_list.aleo/init_as_dao_manager.future;
 
 finalize init_as_dao_manager:
     input r0 as field.public;
@@ -152,16 +158,18 @@ finalize init_as_dao_manager:
     input r3 as address.public;
     input r4 as field.public;
     input r5 as address.public;
-    input r6 as multi_dao_support_program.aleo/update_dao_manager.future;
-    await r6;
-    contains proposers_managers[r0] into r7;
-    not r7 into r8;
-    assert.eq r8 true;
+    input r6 as field.public;
+    input r7 as multi_dao_support_program.aleo/update_dao_manager.future;
+    await r7;
+    contains proposers_managers[r0] into r8;
+    not r8 into r9;
+    assert.eq r9 true;
     set r5 into proposers_managers[r0];
     set r3 into dao_manager_updaters[r0];
     set r1 into voting_system_managers[r0];
     set true into approved_proposers[r4];
     set true into approved_proposers[r2];
+    set true into approved_proposers[r6];
 
 
 

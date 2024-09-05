@@ -46,16 +46,23 @@ function register_dao:
     input r0 as field.public;
     input r1 as field.public;
     input r2 as address.public;
-    cast r0 r1 r2 into r3 as Dao;
-    async register_dao r3 into r4;
-    output r4 as multi_dao_support_program.aleo/register_dao.future;
+    input r3 as address.public;
+    input r4 as field.public;
+    cast r0 r1 r2 into r5 as Dao;
+    cast r0 r3 r4 into r6 as VotingSystemKey;
+    hash.bhp256 r6 into r7 as field;
+    async register_dao r5 r6 r7 into r8;
+    output r8 as multi_dao_support_program.aleo/register_dao.future;
 
 finalize register_dao:
     input r0 as Dao.public;
-    contains daos[r0.dao_id] into r1;
-    not r1 into r2;
-    assert.eq r2 true;
+    input r1 as VotingSystemKey.public;
+    input r2 as field.public;
+    contains daos[r0.dao_id] into r3;
+    not r3 into r4;
+    assert.eq r4 true;
     set r0 into daos[r0.dao_id];
+    set r1 into voting_systems[r2];
 
 
 

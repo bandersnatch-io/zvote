@@ -1,5 +1,5 @@
 import multi_dao_support_program.aleo;
-import multi_token_support_program.aleo;
+import multi_token_support_programv1.aleo;
 
 program vs__2_candidates.aleo {
     record CustodyReceipt {
@@ -110,9 +110,9 @@ program vs__2_candidates.aleo {
         public amount: u128,
         public proposal_id: field,
         public candidate: field,
-        private token: multi_token_support_program.aleo/Token
+        private token: multi_token_support_programv1.aleo/Token
     ) -> (
-        multi_token_support_program.aleo/Token,
+        multi_token_support_programv1.aleo/Token,
         CustodyReceipt, 
         Future
     ) {
@@ -130,9 +130,9 @@ program vs__2_candidates.aleo {
             }
         );
         let (change, transfer_future): (
-            multi_token_support_program.aleo/Token,
+            multi_token_support_programv1.aleo/Token,
             Future
-        ) = multi_token_support_program.aleo/transfer_private_to_public(
+        ) = multi_token_support_programv1.aleo/transfer_private_to_public(
             self.address,
             amount,
             token
@@ -181,7 +181,7 @@ program vs__2_candidates.aleo {
     async transition withdraw_receipt(
         public amount: u128,
         private receipt: CustodyReceipt
-    ) -> (CustodyReceipt, multi_token_support_program.aleo/Token, Future) {
+    ) -> (CustodyReceipt, multi_token_support_programv1.aleo/Token, Future) {
         let proposal_key: field = BHP256::hash_to_field(
             ProposalKey {
                 dao_id: receipt.dao_id,
@@ -196,9 +196,9 @@ program vs__2_candidates.aleo {
             }
         );
         let (withdrawal, transfer_future): (
-            multi_token_support_program.aleo/Token,
+            multi_token_support_programv1.aleo/Token,
             Future
-        ) = multi_token_support_program.aleo/transfer_public_to_private(
+        ) = multi_token_support_programv1.aleo/transfer_public_to_private(
             receipt.token_id,
             receipt.owner,
             amount,

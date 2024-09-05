@@ -17,6 +17,12 @@
       "path": "../../DaoManager/daom__approved_proposer_list"
     },
     {
+      "name": "daom__no_approval_required.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManager/daom__no_approval_required"
+    },
+    {
       "name": "psm__dao_based.aleo",
       "location": "local",
       "network": null,
@@ -29,10 +35,16 @@
       "path": "../../DaoManagerUpdater/daomu__dao_based"
     },
     {
-      "name": "vsm__dao_based.aleo",
+      "name": "vsm__dao_based_apl.aleo",
       "location": "local",
       "network": null,
-      "path": "../../VotingSystemManager/vsm__dao_based"
+      "path": "../../VotingSystemManager/vsm__dao_based_apl"
+    },
+    {
+      "name": "vsm__dao_based_nar.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../VotingSystemManager/vsm__dao_based_nar"
     }
   ]
 }

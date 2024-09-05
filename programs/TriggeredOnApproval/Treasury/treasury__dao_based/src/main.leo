@@ -1,4 +1,4 @@
-import multi_token_support_program.aleo;
+import multi_token_support_programv1.aleo;
 import multi_dao_support_program.aleo;
 import daom__approved_proposer_list.aleo;
 
@@ -80,7 +80,7 @@ program treasury__dao_based.aleo {
             }
         );
         let transfer_future: Future = 
-            multi_token_support_program.aleo/transfer_public(
+            multi_token_support_programv1.aleo/transfer_public(
                 hooked_transfer.token_id,
                 hooked_transfer.recipient,
                 hooked_transfer.amount,

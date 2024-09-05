@@ -36,21 +36,40 @@ program multi_dao_support_program.aleo {
     async transition register_dao(
         public dao_id: field,
         public token_id: field,
-        public dao_manager: address
+        public dao_manager: address,
+        public voting_system: address,
+        public vs_params_hash: field
     ) -> Future {
         let dao: Dao = Dao {
             dao_id: dao_id,
             token_id: token_id,
             dao_manager: dao_manager
         };
-        return finalize_register_dao(dao);
+        let voting_system_key: VotingSystemKey = VotingSystemKey{
+            dao_id: dao_id,
+            voting_system: voting_system,
+            vs_params_hash: vs_params_hash
+        };
+        let voting_system_key_hash: field = BHP256::hash_to_field(
+            voting_system_key
+        );
+
+        return finalize_register_dao(
+            dao,
+            voting_system_key,
+            voting_system_key_hash
+        );
     }
     async function finalize_register_dao(
-        dao: Dao
+        dao: Dao,
+        voting_system_key: VotingSystemKey,
+        voting_system_key_hash: field
     ) {
         let dao_exists: bool = daos.contains(dao.dao_id);
         assert(!dao_exists);
         daos.set(dao.dao_id, dao);
+
+        voting_systems.set(voting_system_key_hash, voting_system_key);
     }
 
 

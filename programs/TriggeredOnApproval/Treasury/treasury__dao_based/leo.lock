@@ -8,7 +8,7 @@ dependencies = []
 [[package]]
 name = "multi_token_support_program.aleo"
 location = "local"
-path = "/Users/palong/bandersnatch/projects/zvote/programs/TriggeredOnApproval/Treasury/treasury__dao_based/../../../MultiSupportProgram/multi_token_support_program"
+path = "/Users/palong/bandersnatch/projects/zvote/programs/TriggeredOnApproval/Treasury/treasury__dao_based/../../../MultiSupportProgram/multi_dao_support_program/../multi_token_support_program"
 checksum = "cd163089dcae74c08abdfc6927a63b918e82b36b9e4f7ef10acf98907f7edcab"
 dependencies = ["credits.aleo"]
 
@@ -16,12 +16,19 @@ dependencies = ["credits.aleo"]
 name = "multi_dao_support_program.aleo"
 location = "local"
 path = "/Users/palong/bandersnatch/projects/zvote/programs/TriggeredOnApproval/Treasury/treasury__dao_based/../../../MultiSupportProgram/multi_dao_support_program"
-checksum = "9cace111a80d4cf39b7da6d560ac663756529f1789655ad4467192d56e92cb2e"
+checksum = "8464db9e40d5dd798bd10bd303e2ccafb3a74c526a2ddd89865f0bb972ebb43c"
 dependencies = ["multi_token_support_program.aleo"]
 
 [[package]]
 name = "daom__approved_proposer_list.aleo"
 location = "local"
 path = "/Users/palong/bandersnatch/projects/zvote/programs/TriggeredOnApproval/Treasury/treasury__dao_based/../../../DaoManager/daom__approved_proposer_list"
-checksum = "06321438fe6302dc5e5932b3bb0583e796bca468ac5af9a1541f9be1d263d238"
+checksum = "6172e6570b0968abbbebd816db4e7ad8ac7d134919ffb34249710aa1b17934e9"
 dependencies = ["multi_dao_support_program.aleo"]
+
+[[package]]
+name = "multi_token_support_programv1.aleo"
+network = "testnet"
+location = "network"
+checksum = "2c9da2a20e6324f093435a40e00bc8114c5b7952cb4262ae0462cb90f817546e"
+dependencies = ["credits.aleo"]

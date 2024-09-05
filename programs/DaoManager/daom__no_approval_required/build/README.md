@@ -1,4 +1,4 @@
-# no_approval_required_proposer.aleo
+# daom__no_approval_required.aleo
 
 ## Build Guide
 

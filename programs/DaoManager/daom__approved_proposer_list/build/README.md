@@ -1,4 +1,4 @@
-# approved_list_proposer.aleo
+# daom__approved_proposer_list.aleo
 
 ## Build Guide
 

@@ -86,7 +86,7 @@ import multi_dao_support_program.aleo;
 import daom__approved_proposer_list.aleo;
 import psm__dao_based.aleo;
 import daomu__dao_based.aleo;
-import vsm__dao_based.aleo;
+import vsm__dao_based_apl.aleo;
 
 
 program zvote_dao_factory.aleo {
@@ -105,7 +105,7 @@ program zvote_dao_factory.aleo {
         let init_as_dao_manager_future: Future =
             daom__approved_proposer_list.aleo/init_as_dao_manager(
                 dao_id,
-                vsm__dao_based.aleo,
+                vsm__dao_based_apl.aleo,
                 daomu__dao_based.aleo,
                 psm__dao_based.aleo
             );
@@ -114,7 +114,7 @@ program zvote_dao_factory.aleo {
                 dao_id
             );
         let init_as_vs_future: Future =
-            vsm__dao_based.aleo/init_as_voting_system_manager(
+            vsm__dao_based_apl.aleo/init_as_voting_system_manager(
                 dao_id,
                 initial_voting_system,
                 initial_vs_params_hash
