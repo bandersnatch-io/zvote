@@ -1,12 +1,8 @@
 <h1 align="center">
-        <span style="display: inline-block;  vertical-align: middle;">zVote.io</span>
-</h1>
-
-<h1 align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="./media/logo-dark.png" width="350">
-        <source media="(prefers-color-scheme: light)" srcset="./media/logo-light.png" width="350">
-        <img alt="snarkDB" src="./media/logo-light.png" width="350">
+        <source media="(prefers-color-scheme: dark)" srcset="./media/logo-dark.png" width="100">
+        <source media="(prefers-color-scheme: light)" srcset="./media/logo-light.png" width="100">
+        <img alt="snarkDB" src="./media/logo-light.png" width="100">
     </picture>
 </h1>
 
