@@ -1,5 +1,5 @@
 import multi_dao_support_program.aleo;
-import daom__approved_proposer_list.aleo;
+import daom__approved_proposers_001.aleo;
 
 
 program daomu__dao_based.aleo {
@@ -29,7 +29,7 @@ program daomu__dao_based.aleo {
         public is_add: bool // or remove
     ) -> Future {
         let create_proposal_future: Future =
-            daom__approved_proposer_list.aleo/create_proposal(
+            daom__approved_proposers_001.aleo/create_proposal(
                 dao_id,
                 proposal_id,
                 proposal_content,
@@ -72,7 +72,7 @@ program daomu__dao_based.aleo {
         public new_dao_manager: address
     ) -> Future {
         let update_dao_manager_future: Future =
-            daom__approved_proposer_list.aleo/update_dao_manager(
+            daom__approved_proposers_001.aleo/update_dao_manager(
                 dao_id,
                 new_dao_manager
             );

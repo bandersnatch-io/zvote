@@ -5,10 +5,10 @@
   "license": "MIT",
   "dependencies": [
     {
-      "name": "multi_token_support_program.aleo",
+      "name": "multi_token_support_programv1.aleo",
       "location": "local",
       "network": null,
-      "path": "../multi_token_support_program"
+      "path": "../multi_token_support_programv1"
     }
   ]
 }

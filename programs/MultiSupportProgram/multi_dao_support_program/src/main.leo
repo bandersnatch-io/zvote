@@ -25,7 +25,7 @@ program multi_dao_support_program.aleo {
     }
 
     mapping daos: field => Dao;
-    // dao_id => dao_metadata
+    // dao_id => dao
     mapping proposals: field => Proposal;
     // hash(ProposalKey) => Proposal
     mapping voting_systems: field => VotingSystemKey;

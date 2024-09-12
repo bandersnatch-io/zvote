@@ -1,7 +1,23 @@
 import credits.aleo;
-import multi_dao_support_program.aleo;
 import multi_token_support_programv1.aleo;
+import multi_dao_support_program.aleo;
 program vs__2_candidates.aleo;
+
+
+struct TokenMetadata:
+    token_id as field;
+    name as u128;
+    symbol as u128;
+    decimals as u8;
+    supply as u128;
+    max_supply as u128;
+    admin as address;
+    external_authorization_required as boolean;
+    external_authorization_party as address;
+
+struct TokenOwner:
+    account as address;
+    token_id as field;
 
 
 struct Dao:
@@ -24,22 +40,6 @@ struct VotingSystemKey:
     dao_id as field;
     voting_system as address;
     vs_params_hash as field;
-
-struct TokenMetadata:
-    token_id as field;
-    name as u128;
-    symbol as u128;
-    decimals as u8;
-    supply as u128;
-    max_supply as u128;
-    admin as address;
-    external_authorization_required as boolean;
-    external_authorization_party as address;
-
-struct TokenOwner:
-    account as address;
-    token_id as field;
-
 
 record CustodyReceipt:
     owner as address.private;
