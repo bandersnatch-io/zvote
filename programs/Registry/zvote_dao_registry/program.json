@@ -1,0 +1,14 @@
+{
+  "program": "zvote_dao_registry.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "token_registry.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../token_registry"
+    }
+  ]
+}

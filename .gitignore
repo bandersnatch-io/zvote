@@ -2,4 +2,6 @@ outputs/
 **/leo.lock
 **/.DS_Store
 **/.env
+**/.env.testnet
+**/.env.mainnet
 **/node_modules/

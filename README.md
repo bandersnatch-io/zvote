@@ -19,7 +19,7 @@ zVote is framework for building **modular**, **upgradable** and **private** DAOs
 
 It can integrate with any voting system, and is capable of executing arbitrary code onchain. Each of its component is customizable and updatable, through any desired mechanism, including voting making DAO auto-upgradability possible.
 
-This modularity is achieved using Aleo's interoperability between programs. It leverages **`multi_token_support_programv1`** for interacting with governance tokens and managing treasury holdings. Additionally it also utilizes **[Aleo DCP](https://github.com/bandersnatch-io/aleo-dcp/blob/main/README.md)** to implement voting systems with private ongoing results.
+This modularity is achieved using Aleo's interoperability between programs. It leverages **`token_registry`** for interacting with governance tokens and managing treasury holdings. Additionally it also utilizes **[Aleo DCP](https://github.com/bandersnatch-io/aleo-dcp/blob/main/README.md)** to implement voting systems with private ongoing results.
 
 ## Concepts
 
@@ -31,7 +31,7 @@ The motivation behind this design is to encourage, DAOs and developers to propos
 
 ### DAOs
 
-As for tokens with **`multi_token_support_programv1.aleo`**, DAOs are supported by a single registry program: **`multi_dao_support_program.aleo`**. Every DAO has a `DaoManager`, itself upgradable, that is responsible for administrating most features and parameters of the DAO. In particular it can create `Proposal` objects.
+As for tokens with **`token_registry.aleo`**, DAOs are supported by a single registry program: **`zvote_dao_registry.aleo`**. Every DAO has a `DaoManager`, itself upgradable, that is responsible for administrating most features and parameters of the DAO. In particular it can create `Proposal` objects.
 
 ### Proposal
 
@@ -45,7 +45,7 @@ A `DaoManager` has a `VotingSystemManager` handling corresponding DAO's `VotingS
 
 - Anyone can create proposals: **`dm__dao_based.aleo`**.
 - Or just a list of addresses managed by a `ProposersManager` can: **`dm__dao_based.aleo`**.
-**`psm__dao_based_001.aleo`** provides an implementation of a `ProposersManager` that allows new allowed proposers on accepted specific proposal.
+**`psm__dao_based_003.aleo`** provides an implementation of a `ProposersManager` that allows new allowed proposers on accepted specific proposal.
 
 ### DaoManagerUpdater
 
@@ -78,22 +78,22 @@ leo run register_proposer_list_dao \
     \ # Gouvernance token MTSP Token ID: Credits Wrapper
     3443843282313283355522573239085696902919850365217539366784739393210722344986field \
     \ # Voting system:
-    vs__2_candidates.aleo \ 
+    vs__2_candidates_003.aleo \ 
     \ # Voting parameters hash: BHP256::hash_to_field({ candidates: [0field, 0field] })
     5861753428027966921366446481874909916006942163617226737729187037817006635040field \
     aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc \
     aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc \
-    psm__dao_based_001.aleo 
+    psm__dao_based_003.aleo 
 ```
 
 It runs the following leo program then registers the DAO:
 
 ```rust
-import multi_dao_support_program.aleo;
-import daom__approved_proposers_001.aleo;
-import daom__no_approval_required.aleo;
+import zvote_dao_registry.aleo;
+import daom__approved_proposers_003.aleo;
+import daom__no_approval_003.aleo;
 
-program zvote_dao_factory_002.aleo {
+program zvote_dao_factory_003.aleo {
     async transition register_proposer_list_dao(
         public dao_id: field,
         public token_id: field,
@@ -104,15 +104,15 @@ program zvote_dao_factory_002.aleo {
         public proposers_manager: address,
     ) -> Future {
         let register_dao_future: Future =
-            multi_dao_support_program.aleo/register_dao(
+            zvote_dao_registry.aleo/register_dao(
                 dao_id,
                 token_id,
-                daom__approved_proposers_001.aleo,
+                daom__approved_proposers_003.aleo,
                 initial_voting_system,
                 initial_vs_params_hash
             );
         let init_as_dao_manager_future: Future =
-            daom__approved_proposers_001.aleo/init_as_dao_manager(
+            daom__approved_proposers_003.aleo/init_as_dao_manager(
                 dao_id,
                 dao_manager_updater,
                 voting_system_manager,

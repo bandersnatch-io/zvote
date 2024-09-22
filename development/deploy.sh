@@ -10,7 +10,7 @@ deploy_any () {
         --private-key $PRIVATE_KEY \
         --query $NODE_URL \
         --priority-fee 0 \
-        --broadcast "$NODE_URL/testnet/transaction/broadcast" \
+        --broadcast "$NODE_URL/$NETWORK/transaction/broadcast" \
         --network 1 \
         "$2.aleo";
     only_slash="${build_path//[^\/]}";
@@ -25,26 +25,15 @@ deploy_program () {
 }
 
 
-deploy_any "./programs/MultiSupportProgram" "multi_dao_support_program";
-deploy_any "./programs/DaoManager" "daom__no_approval_required";
-deploy_any "./programs/DaoManagerUpdater" "daomu__dao_based";
-deploy_any "./programs/VotingSystemManager" "vsm__dao_based_nar";
-deploy_any "./programs/DaoManager" "daom__approved_proposers_001";
-deploy_any "./programs/VotingSystemManager" "vsm__dao_based_ap_001";
-deploy_any "./programs/ProposersManager" "psm__dao_based_001";
-deploy_any "./programs/DaoFactories" "zvote_dao_factory_002";
-deploy_any "./programs/TriggeredOnApproval/Treasury" "treasury__dao_based_001";
-deploy_any "./programs/VotingSystem" "vs__2_candidates";
+deploy_any "./programs/Registry" "zvote_dao_registry";
+deploy_any "./programs/DaoManager" "daom__no_approval_003";
+deploy_any "./programs/DaoManagerUpdater" "daomu__dao_based_003";
+deploy_any "./programs/VotingSystemManager" "vsm__dao_based_na_003";
+deploy_any "./programs/DaoManager" "daom__approved_proposers_003";
+deploy_any "./programs/VotingSystemManager" "vsm__dao_based_ap_003";
+deploy_any "./programs/ProposersManager" "psm__dao_based_003";
+deploy_any "./programs/DaoFactories" "zvote_dao_factory_003";
+deploy_any "./programs/TriggeredOnApproval/Treasury" "treasury__dao_based_003";
+deploy_any "./programs/VotingSystem" "vs__2_candidates_003";
 
 
-
-
-
-
-snarkos developer deploy \
---private-key $PRIVATE_KEY \
---query $NODE_URL \
---priority-fee 0 \
---broadcast "$NODE_URL/testnet/transaction/broadcast" \
---network 1 \
-"vs__2_candidates.aleo";
