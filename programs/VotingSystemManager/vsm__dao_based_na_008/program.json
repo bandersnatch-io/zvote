@@ -1,0 +1,20 @@
+{
+  "program": "vsm__dao_based_na_008.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "zvote_dao_registry_008.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../Registry/zvote_dao_registry_008"
+    },
+    {
+      "name": "daom__no_approval_008.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManager/daom__no_approval_008"
+    }
+  ]
+}
