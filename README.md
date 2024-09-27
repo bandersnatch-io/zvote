@@ -31,7 +31,7 @@ The motivation behind this design is to encourage, DAOs and developers to propos
 
 ### DAOs
 
-As for tokens with **`token_registry.aleo`**, DAOs are supported by a single registry program: **`zvote_dao_registry_008.aleo`**. Every DAO has a `DaoManager`, itself upgradable, that is responsible for administrating most features and parameters of the DAO. In particular it can create `Proposal` objects.
+As for tokens with **`token_registry.aleo`**, DAOs are supported by a single registry program: **`zvote_dao_registry_011.aleo`**. Every DAO has a `DaoManager`, itself upgradable, that is responsible for administrating most features and parameters of the DAO. In particular it can create `Proposal` objects.
 
 ### Proposal
 
@@ -45,7 +45,7 @@ A `DaoManager` has a `VotingSystemManager` handling corresponding DAO's `VotingS
 
 - Anyone can create proposals: **`dm__dao_based.aleo`**.
 - Or just a list of addresses managed by a `ProposersManager` can: **`dm__dao_based.aleo`**.
-**`psm__dao_based_008.aleo`** provides an implementation of a `ProposersManager` that allows new allowed proposers on accepted specific proposal.
+**`psm__dao_based_011.aleo`** provides an implementation of a `ProposersManager` that allows new allowed proposers on accepted specific proposal.
 
 ### DaoManagerUpdater
 
@@ -78,22 +78,22 @@ leo run register_proposer_list_dao \
     \ # Gouvernance token MTSP Token ID: Credits Wrapper
     3443843282313283355522573239085696902919850365217539366784739393210722344986field \
     \ # Voting system:
-    vs__2_candidates_008.aleo \ 
+    vs__2_candidates_012.aleo \ 
     \ # Voting parameters hash: BHP256::hash_to_field({ candidates: [0field, 0field] })
     5861753428027966921366446481874909916006942163617226737729187037817006635040field \
     aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc \
     aleo1qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq3ljyzc \
-    psm__dao_based_008.aleo 
+    psm__dao_based_011.aleo 
 ```
 
 It runs the following leo program then registers the DAO:
 
 ```rust
-import zvote_dao_registry_008.aleo;
-import daom__approved_proposers_008.aleo;
-import daom__no_approval_008.aleo;
+import zvote_dao_registry_011.aleo;
+import daom__approved_proposers_011.aleo;
+import daom__no_approval_011.aleo;
 
-program zvote_dao_factory_008.aleo {
+program zvote_dao_factory_011.aleo {
     async transition register_proposer_list_dao(
         public dao_id: field,
         public token_id: field,
@@ -104,15 +104,15 @@ program zvote_dao_factory_008.aleo {
         public proposers_manager: address,
     ) -> Future {
         let register_dao_future: Future =
-            zvote_dao_registry_008.aleo/register_dao(
+            zvote_dao_registry_011.aleo/register_dao(
                 dao_id,
                 token_id,
-                daom__approved_proposers_008.aleo,
+                daom__approved_proposers_011.aleo,
                 initial_voting_system,
                 initial_vs_params_hash
             );
         let init_as_dao_manager_future: Future =
-            daom__approved_proposers_008.aleo/init_as_dao_manager(
+            daom__approved_proposers_011.aleo/init_as_dao_manager(
                 dao_id,
                 dao_manager_updater,
                 voting_system_manager,

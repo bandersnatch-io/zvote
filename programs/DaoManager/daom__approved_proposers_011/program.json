@@ -1,0 +1,14 @@
+{
+  "program": "daom__approved_proposers_011.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "zvote_dao_registry_011.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../Registry/zvote_dao_registry_011"
+    }
+  ]
+}
