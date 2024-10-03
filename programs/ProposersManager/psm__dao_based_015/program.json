@@ -1,0 +1,20 @@
+{
+  "program": "psm__dao_based_015.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "zvote_dao_registry_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../Registry/zvote_dao_registry_015"
+    },
+    {
+      "name": "daom__approved_proposers_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManager/daom__approved_proposers_015"
+    }
+  ]
+}

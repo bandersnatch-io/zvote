@@ -1,0 +1,32 @@
+{
+  "program": "h__update_daom_helper_015.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "daom__approved_proposers_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManager/daom__approved_proposers_015"
+    },
+    {
+      "name": "daom__no_approval_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManager/daom__no_approval_015"
+    },
+    {
+      "name": "daomu__dao_based_ap_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManagerUpdater/daomu__dao_based_ap_015"
+    },
+    {
+      "name": "daomu__dao_based_na_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManagerUpdater/daomu__dao_based_na_015"
+    }
+  ]
+}

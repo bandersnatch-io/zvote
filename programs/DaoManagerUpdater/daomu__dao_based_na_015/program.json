@@ -1,0 +1,20 @@
+{
+  "program": "daomu__dao_based_na_015.aleo",
+  "version": "0.1.0",
+  "description": "",
+  "license": "MIT",
+  "dependencies": [
+    {
+      "name": "daom__no_approval_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../DaoManager/daom__no_approval_015"
+    },
+    {
+      "name": "zvote_dao_registry_015.aleo",
+      "location": "local",
+      "network": null,
+      "path": "../../Registry/zvote_dao_registry_015"
+    }
+  ]
+}

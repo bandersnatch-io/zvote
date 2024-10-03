@@ -25,17 +25,17 @@ deploy_program () {
 }
 
 
-deploy_any "./programs/Registry" "zvote_dao_registry_011";
+deploy_any "./programs/Registry" "zvote_dao_registry_015";
 
-deploy_any "./programs/DaoManager" "daom__no_approval_011";
-deploy_any "./programs/DaoManagerUpdater" "daomu__dao_based_ap_011";
-deploy_any "./programs/DaoManagerUpdater" "daomu__dao_based_na_011";
-deploy_any "./programs/VotingSystemManager" "vsm__dao_based_na_011";
-deploy_any "./programs/DaoManager" "daom__approved_proposers_011";
-deploy_any "./programs/VotingSystemManager" "vsm__dao_based_ap_011";
-deploy_any "./programs/ProposersManager" "psm__dao_based_011";
-deploy_any "./programs/DaoFactories" "zvote_dao_factory_011";
-deploy_any "./programs/TriggeredOnApproval/Treasury" "treasury__dao_based_011";
-deploy_any "./programs/VotingSystem" "vs__2_candidates_012";
-deploy_any "./programs/Helper" "h__update_daom_helper_011";
+deploy_any "./programs/DaoManager" "daom__no_approval_015";
+deploy_any "./programs/DaoManagerUpdater" "daomu__dao_based_ap_015";
+deploy_any "./programs/DaoManagerUpdater" "daomu__dao_based_na_015";
+deploy_any "./programs/VotingSystemManager" "vsm__dao_based_na_015";
+deploy_any "./programs/DaoManager" "daom__approved_proposers_015";
+deploy_any "./programs/VotingSystemManager" "vsm__dao_based_ap_015";
+deploy_any "./programs/ProposersManager" "psm__dao_based_015";
+deploy_any "./programs/DaoFactories" "zvote_dao_factory_015";
+deploy_any "./programs/TriggeredOnApproval/Treasury" "treasury__dao_based_015";
+deploy_any "./programs/VotingSystem" "vs__2_candidates_015";
+deploy_any "./programs/Helper" "h__update_daom_helper_015";
 
